@@ -41,7 +41,7 @@ const mapTmdbToMovie = (item: any): Movie => {
     cast: [],
     popularity: Math.round(item.popularity || 0),
     type: isSeries ? 'series' : 'movie',
-    episode: isSeries ? 'Épisode 1' : undefined,
+    episode: isSeries ? 'Ãpisode 1' : undefined,
     season: isSeries ? 1 : undefined
   };
 };
@@ -90,7 +90,7 @@ export async function fetchMovies(query: string = "trending", count: number = 20
     let endpoint = '/trending/all/day';
     let params = `api_key=${TMDB_API_KEY}&language=fr-FR&page=${page}`;
     
-    if (query.toLowerCase().includes('series') || query.toLowerCase().includes('séries')) {
+    if (query.toLowerCase().includes('series') || query.toLowerCase().includes('sÃ©ries')) {
       endpoint = '/tv/popular';
       if (query.toLowerCase().includes('top')) endpoint = '/tv/top_rated';
     } else if (query.toLowerCase().includes('movies') || query.toLowerCase().includes('films')) {
