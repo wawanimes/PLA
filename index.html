@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Streaming - Streaming Illimité</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Open+Sans:wght@300;400;700&family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #010103 url('https://www.transparenttextures.com/patterns/carbon-fibre.png') repeat;
+            background-color: #010103;
+            color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+        
+        /* Scanline effect for 2016 feel */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(0, 161, 250, 0.4);
+            text-transform: uppercase;
+        }
+
+        a, a:link, a:visited {
+            color: #70ccff;
+            text-shadow: 0 0 5px rgba(0, 161, 250, 0.4);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #B0E3FF;
+            text-shadow: 0 0 5px rgba(0, 161, 250, 0.6);
+            text-decoration: underline;
+        }
+
+        .futuristic-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Metallic Panels & Blocks */
+        .mod-box {
+            background: linear-gradient(180deg, #151515 0%, #0a0a0a 100%);
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 0 0 1px rgba(0,0,0,0.9), inset 0 0 5px rgba(0,0,0,0.4), 0 3px 5px rgba(0,0,0,0.5);
+            border: 1px solid #111;
+        }
+
+        .chrome-text {
+            background: linear-gradient(to bottom, #fff 0%, #aaa 40%, #555 50%, #888 60%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.5));
+        }
+
+        .orb-glow {
+            box-shadow: 0 0 30px rgba(0, 161, 250, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .metallic-panel {
+            background: linear-gradient(135deg, #1a1a1c 0%, #0d0d0f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05);
+        }
+
+        /* Navigation specifics */
+        #top-menu li > a, #top-menu li > button {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            height: 40px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+        }
+
+        #top-menu li > a:hover, #top-menu li > button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+        }
+
+        .search-input {
+            background: rgba(0,0,0,.75);
+            border: 0 none;
+            color: #B0E3FF;
+            width: 180px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.1), 0 1px 3px rgba(0,0,0,0.2) inset;
+            transition: all 0.2s ease-in-out;
+            font-style: italic;
+            font-size: 11px;
+        }
+
+        .search-input:focus {
+            background: rgba(0,153,255,.4);
+            width: 240px;
+            color: #fff !important;
+        }
+
+        .tab-btn {
+            position: relative;
+            padding: 6px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Open Sans Condensed', sans-serif;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(to bottom, #222, #000);
+            border-radius: 5px 5px 0 0;
+            margin-right: 2px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 0;
+        }
+
+        .tab-btn.active {
+            background: #00A1FA;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 161, 250, 0.6);
+            border-color: #00A1FA;
+        }
+
+        /* Fullstreaming card style provided in CSS snippet */
+        .fullstreaming {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .fullstreaming:hover h3.mov-title {
+            display: none;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #222;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>

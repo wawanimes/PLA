@@ -1,0 +1,7 @@
+{
+  "name": "PLNE",
+  "description": "A 2016-inspired cinematic discovery platform with advanced manga scan distribution tools and professional streaming directory features.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
